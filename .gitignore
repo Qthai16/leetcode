@@ -1,3 +1,11 @@
+CMakeFiles/
+CMakeCache.txt
+Makefile
+build.ninja
+cmake_install.cmake
+rules.ninja
+compile_commands.json
+
 # Prerequisites
 *.d
 
