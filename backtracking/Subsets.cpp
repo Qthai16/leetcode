@@ -12,21 +12,20 @@ using namespace std;
 
 class Solution {
 public:
+    void backtrack(int start, vector<int> &nums, vector<int> &path, vector<vector<int>> &result) {
+        result.push_back(path);// Add the current subset
+        for (int i = start; i < nums.size(); ++i) {
+            path.push_back(nums[i]);             // Choose
+            backtrack(i + 1, nums, path, result);// Explore
+            path.pop_back();                     // Un-choose (backtrack)
+        }
+    }
+
     vector<vector<int>> subsets(vector<int> &nums) {
         vector<int> state;
         vector<vector<int>> ret;
         int start = 0;
         backtrack(start, nums, state, ret);
         return ret;
-    }
-
-    void backtrack(int start, vector<int>& nums, vector<int>& path, vector<vector<int>>& result) {
-        result.push_back(path);  // Add the current subset
-
-        for (int i = start; i < nums.size(); ++i) {
-            path.push_back(nums[i]);           // Choose
-            backtrack(i + 1, nums, path, result); // Explore
-            path.pop_back();                   // Un-choose (backtrack)
-        }
     }
 };

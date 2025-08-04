@@ -6,6 +6,8 @@
 using namespace std;
 
 class Solution {
+// next greater: stack giam (top stack la min)
+// next smaller: stack tang (top stack la max)
 public:
     vector<int> dailyTemperatures(vector<int>& temperatures) {
         const auto &t = temperatures;

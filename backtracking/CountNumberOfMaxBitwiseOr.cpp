@@ -15,14 +15,15 @@ using namespace std;
 class Solution {
 public:
     void backtracking(int start, vector<int>& nums, vector<int>&path, int& max, int& maxcnt) {
-        if (!path.empty()) {
+        if (!path.empty()) { // select subset
             int cur = 0;
+            // xor all value in path
             for (auto i = 0; i < path.size(); i++) {
                 cur |= path[i];
             }
-            if (cur == max) {
+            if (cur == max) { // increase max cnt
                 maxcnt += 1;
-            } else if (cur > max) {
+            } else if (cur > max) { // replace max, reset max cnt to 1
                 max = cur;
                 maxcnt = 1;
             }

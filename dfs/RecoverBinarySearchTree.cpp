@@ -105,6 +105,7 @@ public:
         while (!s.empty()) {
             dfs(s.top(), s, arr);
         }
+        // find 1 or 2 index that not sastify a[i] < a[i+1]
         vector<int> ind;
         for (auto i = 0; i < arr.size(); i++) {
             if (i + 1 >= arr.size()) break;
@@ -117,7 +118,7 @@ public:
             swapNode(arr[ind[0]].second, arr[ind[1] + 1].second);
     }
 
-    void recoverTree(TreeNode *root) {
+    void recoverTreeMorris(TreeNode *root) {
     // solution 2: use morris traversal + compare last node with current node
         if (root == nullptr) return;
         pair<TreeNode *, TreeNode *> swapNodes{nullptr, nullptr};

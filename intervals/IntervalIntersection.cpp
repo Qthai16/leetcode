@@ -48,7 +48,7 @@ public:
         for (auto it = sorted.begin(); it != sorted.end();) {
             auto next = std::next(it);
             if (next == sorted.end()) break;
-            if (*it == *next) {
+            if (*it == *next) { // same intervals, eg: [1,2] vs [1,2]
                 ret.push_back({it->first, it->second});
                 it = next;
             } else if (it->second >= next->first) {

@@ -5,6 +5,8 @@ build.ninja
 cmake_install.cmake
 rules.ninja
 compile_commands.json
+build*
+debug/
 
 # Prerequisites
 *.d

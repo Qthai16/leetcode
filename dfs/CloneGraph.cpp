@@ -36,27 +36,24 @@ public:
     Node *cloneGraph(Node *root) {
         if (root == nullptr)
             return root;
-        // stack<Node *> s;
-        unordered_map<Node *, Node*> visitted;
+        unordered_map<Node *, Node*> visitted; // org node: clone node
         Node *clone = new Node(root->val);
         auto dfs = [&](Node *n, Node *clone, auto &fn) {
             if (n == nullptr || visitted.count(n))
                 return;
-            // s.push(n);
             visitted[n] = clone;
             for (const auto &nei: n->neighbors) {
                 Node *neiClone;
                 auto it = visitted.find(nei);
                 if (it == visitted.end()) {
                     neiClone = new Node(nei->val);
-                    printf("new node: %d\n", nei->val);
+                    // printf("new node: %d\n", nei->val);
                 }
                 else neiClone = it->second;
                 clone->neighbors.push_back(neiClone);
-                printf("link node %d vs %d\n", clone->val, neiClone->val);
+                // printf("link node %d vs %d\n", clone->val, neiClone->val);
                 fn(nei, neiClone, fn);
             }
-            // if (!s.empty()) s.pop();
         };
         auto ret = clone;
         dfs(root, clone, dfs);

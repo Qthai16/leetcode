@@ -1,3 +1,16 @@
+#include <vector>
+#include <unordered_map>
+#include <unordered_set>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <string>
+#include <cstdlib>
+#include <algorithm>
+#include <climits>
+
+using namespace std;
+
 class NumArray {
 public:
     NumArray(vector<int>& nums) {

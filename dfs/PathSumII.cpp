@@ -31,17 +31,16 @@ public:
             if (node == nullptr) return;
             s.push_back(node);
             currSum += s.back()->val;
-            if (node->left == nullptr && node->right == nullptr) {
-                // leaf node
-                printf("cur sum: %d, s.back: %d\n", currSum, s.back()->val);
-                if (currSum == targetSum) {
+            if (node->left == nullptr && node->right == nullptr) { // leaf node
+                // printf("cur sum: %d, s.back: %d\n", currSum, s.back()->val);
+                if (currSum == targetSum) { // we found a path
                     vector<int> tmp(s.size());
                     for (auto i = 0; i < s.size(); i++) {
                         tmp[i] = s[i]->val;
                     }
                     ret.push_back(std::move(tmp));
                 }
-                if (!s.empty()) {
+                if (!s.empty()) { // backtrack, substract current sum
                     currSum -= s.back()->val;
                     s.pop_back();
                 }
@@ -50,7 +49,7 @@ public:
             if (node->left) fn(node->left, fn);
             if (node->right) fn(node->right, fn);
 
-            if (!s.empty()) {
+            if (!s.empty()) { // backtrack
                 currSum -= s.back()->val;
                 s.pop_back();
             }
