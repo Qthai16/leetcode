@@ -1,16 +1,28 @@
+#include <vector>
+#include <unordered_map>
+#include <unordered_set>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <string>
+#include <cstdlib>
+#include <algorithm>
+#include <climits>
+
+using namespace std;
+
 int romanToInt(string s) {
     char last = '\0';
     int ret = 0;
     auto lookup = unordered_map<char, int>{
-        {'I', 1},
-        {'V', 5},
-        {'X', 10},
-        {'L', 50},
-        {'C', 100},
-        {'D', 500},
-        {'M', 1000}
-    };
-    for (const auto& e : s) {
+            {'I', 1},
+            {'V', 5},
+            {'X', 10},
+            {'L', 50},
+            {'C', 100},
+            {'D', 500},
+            {'M', 1000}};
+    for (const auto &e: s) {
         auto iter = lookup.find(e);
         if (iter == lookup.end()) continue;
         ret += iter->second;
@@ -26,24 +38,23 @@ int romanToInt(string s) {
 }
 
 int romanToInt(string s) {
-        int res = 0;
-        unordered_map<char, int> roman = {
+    int res = 0;
+    unordered_map<char, int> roman = {
             {'I', 1},
             {'V', 5},
-            {'X', 10}, 
+            {'X', 10},
             {'L', 50},
             {'C', 100},
             {'D', 500},
-            {'M', 1000}
-        };
+            {'M', 1000}};
 
-        for (int i = 0; i < s.size() - 1; i++) {
-            if (roman[s[i]] < roman[s[i + 1]]) {
-                res -= roman[s[i]];
-            } else {
-                res += roman[s[i]];
-            }
+    for (int i = 0; i < s.size() - 1; i++) {
+        if (roman[s[i]] < roman[s[i + 1]]) {
+            res -= roman[s[i]];
+        } else {
+            res += roman[s[i]];
         }
-
-        return res + roman[s[s.size() - 1]];        
     }
+
+    return res + roman[s[s.size() - 1]];
+}
