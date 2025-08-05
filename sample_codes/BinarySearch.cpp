@@ -5,12 +5,9 @@
 // #include "libs/RandomUtils.h"
 
 int lower_bound(const std::vector<int> &a, int target) {
-    if (a.empty()) return 0;
-    auto l = a[0];
-    auto h = a.size();
-    int m;
+    int l = 0, h = a.size();
     while (l < h) {
-        m = (l + h) / 2;
+        auto m = l + (h - l) / 2;
         if (a[m] < target) {
             l = m + 1;
         } else {
