@@ -1,8 +1,4 @@
-#include <vector>
-#include <tuple>
-#include <algorithm>
-#include <queue>
-
+#include <bits/stdc++.h>
 using namespace std;
 
 // free time: next.start - pre.end

@@ -1,11 +1,9 @@
-// https://leetcode.com/problems/subarray-sums-divisible-by-k/description/
-
-// https://stackoverflow.com/questions/7594508/why-does-the-modulo-operator-result-in-negative-values
-#include <vector>
-#include <unordered_map>
-#include <cstdlib>
-#include <cstdio>
+#include <bits/stdc++.h>
 using namespace std;
+
+// notes: modulo of negative number
+// https://leetcode.com/problems/subarray-sums-divisible-by-k/description/
+// https://stackoverflow.com/questions/7594508/why-does-the-modulo-operator-result-in-negative-values
 
 class Solution {
     int nChoose2(int n) {
