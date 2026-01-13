@@ -1,28 +1,14 @@
-#include <vector>
-#include <unordered_map>
-#include <unordered_set>
-#include <deque>
-#include <queue>
-#include <stack>
-#include <string>
-#include <cstdlib>
-#include <algorithm>
-#include <climits>
-
+#include <bits/stdc++.h>
 using namespace std;
 
-// 1 <= nums.length <= 3 * 104
-// -100 <= nums[i] <= 100
-// nums is sorted in non-decreasing order.
-// return unique elements
+// https://leetcode.com/submissions/detail/1883587929/
 
 class Solution {
 public:
     int removeDuplicates(vector<int>& nums) {
-        if (nums.empty()) return 0;
-        if (nums.size() == 1) return 1;
+        // sliding windows
+        if (nums.size() <= 1) return nums.size();
         int l = 0, r = l + 1;
-        int i = 0;
         int uniqCnt = 0;
         while (l < nums.size() && r < nums.size()) {
             if (nums[l] >= nums[r]) {
@@ -30,8 +16,10 @@ public:
                 continue;
             }
             if (r - l > 1) {
-                for (auto j = l + 1, k = r; j < r && k < nums.size(); j++, k++) {
-                    swap(nums[j], nums[k]);
+                // swap elements in range [l + 1, l + 1 + k] with [r, r + k], where k run from 0 -> r - l - 1
+                auto k = r - l - 1;
+                for (auto i = 0; i < k && r + i < nums.size(); i++) {
+                    swap(nums[l + 1 + i], nums[r + i]);
                 }
                 l = l + 1;
                 r = l + 1;
