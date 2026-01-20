@@ -1,14 +1,4 @@
-#include <vector>
-#include <unordered_map>
-#include <unordered_set>
-#include <deque>
-#include <queue>
-#include <stack>
-#include <string>
-#include <cstdlib>
-#include <algorithm>
-#include <climits>
-
+#include <bits/stdc++.h>
 using namespace std;
 
 struct ListNode {
@@ -22,7 +12,7 @@ struct ListNode {
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
-        // fast and slow pointer
+        // fast and slow pointer (floyd's cycle detection)
         auto fast = head;
         auto slow = head;
         if (head == nullptr || head->next == nullptr)

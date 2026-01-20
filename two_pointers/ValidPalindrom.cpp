@@ -9,7 +9,7 @@ public:
         string s2;
         const auto gap = abs('A' - 'a');
         for (const auto &c: s) {
-            if ('A' <= c && c <= 'Z') {
+            if ('A' <= c && c <= 'Z') { // transform to lower_case
                 s2 += c + gap;
             } else if (('a' <= c && c <= 'z') || ('0' <= c && c <= '9')) {
                 s2 += c;

@@ -4,8 +4,6 @@ using namespace std;
 // https://leetcode.com/problems/partition-list
 
 // Definition for singly-linked list.
-// [1,4,3,0,2,5,2]
-// 3
 struct ListNode {
     int val;
     ListNode *next;
@@ -78,12 +76,12 @@ public:
     ListNode *partition(ListNode *head, int x) {
         ListNode *preCur = nullptr, *cur = nullptr, *at = nullptr, *preAt = nullptr;
         cur = head;
-        ListNode* oldHead = head;
+        ListNode *oldHead = head;
         while (cur) {
             if (cur->val >= x) {
                 if (at == nullptr) {
                     at = cur;
-                    preAt = preCur;   
+                    preAt = preCur;
                 }
                 preCur = cur;
                 cur = cur->next;

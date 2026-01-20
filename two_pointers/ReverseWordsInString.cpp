@@ -1,14 +1,4 @@
-#include <vector>
-#include <unordered_map>
-#include <unordered_set>
-#include <deque>
-#include <queue>
-#include <stack>
-#include <string>
-#include <cstdlib>
-#include <algorithm>
-#include <climits>
-
+#include <bits/stdc++.h>
 using namespace std;
 
 class Solution {
@@ -19,21 +9,21 @@ public:
         stack<char> d;
         string ans;
         for (int i = s.size() - 1; i >= 0; i--) {
-            if (s[i] == ' ') {
+            if (s[i] == ' ') { // end of prev word, reverse it and append to ans
                 while (!d.empty()) {
                     ans += d.top();
                     d.pop();
                 }
-                if (!ans.empty() && ans[ans.size() - 1] != ' ') ans += ' ';
+                if (!ans.empty() && ans[ans.size() - 1] != ' ') ans += ' '; // append ' ' to ans
                 continue;
             }
             d.push(s[i]);
         }
-        while (!d.empty()) {
+        while (!d.empty()) { // append remains word
             ans += d.top();
             d.pop();
         }
-        if (ans[ans.size() - 1] == ' ') ans.pop_back();
+        if (ans[ans.size() - 1] == ' ') ans.pop_back(); // trim end
         return ans;
     }
     
@@ -57,10 +47,10 @@ public:
             }
             l--;
         }
-        for (auto i = l + 1; i <= r; i++) {
+        for (auto i = l + 1; i <= r; i++) { // last word
             ans += s[i];
         }
-        while (ans[ans.size() - 1] == ' ') {
+        while (ans[ans.size() - 1] == ' ') { // trim end
             ans.pop_back();
         }
         return ans;

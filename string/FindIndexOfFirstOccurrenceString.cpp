@@ -1,14 +1,7 @@
-#include <vector>
-#include <unordered_map>
-#include <unordered_set>
-#include <deque>
-#include <queue>
-#include <stack>
-#include <string>
-#include <cstdlib>
-#include <algorithm>
-
+#include <bits/stdc++.h>
 using namespace std;
+
+// todo: solve this using other two pointers or other approach
 
 class Solution {
 public:

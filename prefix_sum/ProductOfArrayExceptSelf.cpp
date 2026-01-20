@@ -12,8 +12,8 @@ class Solution {
 public:
     vector<int> productExceptSelf(vector<int>& nums) {
         // prefix product * suffix product
-        vector<int> p(nums.size() + 1);
-        vector<int> s(nums.size() + 1);
+        vector<int> p(nums.size() + 1); // prefix product
+        vector<int> s(nums.size() + 1); // suffix product
         vector<int> ret(nums.size());
         p[0] = 1;
         s[s.size() - 1] = 1;

@@ -1,7 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-class Solution {
+// https://leetcode.com/problems/longest-substring-without-repeating-characters/description
+
+class Solution1 {
 public:
     int lengthOfLongestSubstring(string s) {
         std::unordered_map<char, int> lk;
@@ -24,7 +26,7 @@ public:
 };
 
 
-class Solution {
+class Solution2 {
 public:
     int lengthOfLongestSubstring(string s) {
         std::unordered_set<char> lk;
@@ -48,5 +50,35 @@ public:
             ret = std::max(ret, static_cast<int>(i - left + 1));
         }
         return ret;
+    }
+};
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        if (s.size() <= 1)
+            return s.size();
+        unordered_set<int> bucket;
+        int l = 0, r = l + 1;
+        int ret = 0;
+        bucket.insert(s[l]);
+        while (r < s.size()) {
+            auto rpair = bucket.insert(s[r]);
+            if (rpair.second) { // unique char, increase r and continue
+                ret = max(ret, r - l + 1);
+                r++;
+                continue;
+            }
+            // bucket contain repeating char, erase until s[l] == s[r]
+            while (l < r && s[l] != s[r]) {
+                bucket.erase(s[l]);
+                l++;
+            }
+            bucket.erase(s[l]); // erase duplicate char
+            bucket.insert(s[r]); // insert current char
+            l++;
+            r++;
+        }
+        return max(ret, r - l);
     }
 };

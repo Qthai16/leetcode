@@ -18,7 +18,6 @@ public:
     bool validPalindrome(string s) {
         if (s.size() <= 2) return true;
         int l = 0, r = s.size() - 1;
-        bool skip = false;
         while (l < r) {
             if (s[l] == s[r]) {
                 l++;

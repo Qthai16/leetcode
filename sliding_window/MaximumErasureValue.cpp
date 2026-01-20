@@ -1,16 +1,7 @@
-// https://leetcode.com/problems/maximum-erasure-value/description
-
-#include <vector>
-#include <unordered_map>
-#include <unordered_set>
-#include <deque>
-#include <queue>
-#include <stack>
-#include <string>
-#include <cstdlib>
-#include <algorithm>
-
+#include <bits/stdc++.h>
 using namespace std;
+
+// https://leetcode.com/problems/maximum-erasure-value/description
 
 class Solution {
 public:
@@ -41,7 +32,7 @@ public:
     int maximumUniqueSubarray(vector<int> &nums) {
         // sliding windows + prefix sum
         int ans = 0;
-        vector<int> presum(nums.size() + 1);        
+        vector<int> presum(nums.size() + 1);
         for (auto i = 0; i < nums.size(); i++) {
             presum[i + 1] = presum[i] + nums[i];
         }

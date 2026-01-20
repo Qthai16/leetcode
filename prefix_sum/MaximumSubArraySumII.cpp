@@ -15,7 +15,7 @@ public:
             presum[i + 1] = presum[i] + nums[i];
         }
         long maxsum = LONG_MIN;
-        multiset<long> ms;
+        multiset<long> ms; // keep the smallest presum[i] at begin()
         for (int i = a; i <= nums.size(); i++) {
             if (i > b)// exceed window size, erase element
                 ms.erase(ms.find(presum[i - b - 1]));

@@ -1,18 +1,11 @@
-#include <vector>
-#include <unordered_map>
-#include <unordered_set>
-#include <deque>
-#include <queue>
-#include <stack>
-#include <string>
-#include <cstdlib>
+#include <bits/stdc++.h>
 using namespace std;
 
 class Solution {
 public:
     bool isValid(string s) {
         if (s.empty()) return true;
-        stack<char> mystack;
+        stack<char, list<char>> mystack;
         for (auto i = 0; i < s.size(); i++) {
             auto c = s[i];
             if (c == '(' || c == '{' || c == '[') {
