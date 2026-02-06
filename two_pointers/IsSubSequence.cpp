@@ -6,6 +6,7 @@ using namespace std;
 class Solution {
 public:
     bool isSubsequence(string s, string t) {
+        // return true if s is sub-sequence of t
         if (s.empty()) return true;
         if (t.empty()) return false;
         int si = 0, ti = 0;

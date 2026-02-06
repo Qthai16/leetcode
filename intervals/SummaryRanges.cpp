@@ -5,7 +5,7 @@ using namespace std;
 
 class Solution {
 public:
-    vector<string> summaryRanges(vector<int>& nums) {
+    vector<string> oldSolution(vector<int>& nums) {
         vector<string> ret;
         stack<pair<int64_t, int64_t>> s;
         auto i64min = INT64_MIN;
@@ -49,6 +49,34 @@ public:
             s.pop();
         }
         ret.insert(ret.end(), remains.rbegin(), remains.rend());
+        return ret;
+    }
+
+    vector<string> summaryRanges(vector<int>& nums) {
+        vector<pair<int, int>> ranges;
+        for (const auto& n : nums) {
+            if (ranges.empty()) {
+                ranges.push_back({n, INT_MIN});
+                continue;
+            }
+            auto last = ranges[ranges.size() - 1].second != INT_MIN ? ranges[ranges.size() - 1].second : ranges[ranges.size() - 1].first;
+            if (last == INT_MAX) {
+                ranges.push_back({n, INT_MIN});
+                continue;
+            }
+            if (last + 1 == n) { // last + 1 instead of n - last for integer overflow
+                ranges[ranges.size() - 1].second = n;
+            } else {
+                ranges.push_back({n, INT_MIN});
+            }
+        }
+        vector<string> ret;
+        for (auto& p : ranges) {
+            string tmp;
+            tmp += std::to_string(p.first);
+            if (p.second != INT_MIN) tmp += string{"->"} + std::to_string(p.second);
+            ret.push_back(std::move(tmp));
+        }
         return ret;
     }
 };

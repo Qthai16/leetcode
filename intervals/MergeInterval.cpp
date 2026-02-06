@@ -1,35 +1,10 @@
-// Given an array of intervals where intervals[i] = [starti, endi], merge all overlapping intervals, and return an array of the non-overlapping intervals that cover all the intervals in the input.
-
-// Example 1:
-
-// Input: intervals = [[1,3],[2,6],[8,10],[15,18]]
-// Output: [[1,6],[8,10],[15,18]]
-// Explanation: Since intervals [1,3] and [2,6] overlap, merge them into [1,6].
-// Example 2:
-
-// Input: intervals = [[1,4],[4,5]]
-// Output: [[1,5]]
-// Explanation: Intervals [1,4] and [4,5] are considered overlapping.
-
-
-// Constraints:
-
-// 1 <= intervals.length <= 104
-// intervals[i].length == 2
-// 0 <= starti <= endi <= 104
-
-#include <vector>
-#include <algorithm>
-#include <set>
-#include <cstdio>
-#include <cstdlib>
-
+#include <bits/stdc++.h>
 using namespace std;
 
-
+// https://leetcode.com/problems/merge-intervals/
 class Solution {
 public:
-    vector<vector<int>> merge(vector<vector<int>> &intervals) {
+    vector<vector<int>> oldSolution(vector<vector<int>> &intervals) {
         std::vector<std::pair<int, int>> sorted;
         for (const auto &v: intervals) {
             sorted.push_back(std::make_pair(v[0], v[1]));
@@ -51,6 +26,31 @@ public:
                 ret.push_back(std::vector<int>{it->first, it->second});
                 it++;
             }
+        }
+        return ret;
+    }
+
+    vector<vector<int>> merge(vector<vector<int>> &intervals) {
+        auto& ranges = intervals;
+        std::sort(ranges.begin(), ranges.end(), [](const auto& l, const auto& r) -> bool {
+            return l[0] != r[0] ? l[0] < r[0] : l[1] < r[1];
+        });
+        vector<vector<int>> ret;
+        for (int i = 0, next = i + 1; i < ranges.size();) {
+            if (i == ranges.size() - 1 || next >= ranges.size()) {
+                // last ranges or no more range to check, insert current range and return
+                ret.push_back(ranges[i]);
+                break;
+            }
+            if (ranges[i][1] >= ranges[next][0]) { // overlapped, extend current end
+                ranges[i][1] = max(ranges[i][1], ranges[next][1]);
+                next++;
+                continue;
+            }
+            // not overlapped anymore, insert current range and continue
+            ret.push_back(ranges[i]);
+            i = next;
+            next = i + 1;
         }
         return ret;
     }

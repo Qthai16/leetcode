@@ -1,38 +1,9 @@
-#include <vector>
-#include <set>
-#include <unordered_map>
-#include <algorithm>
-
+#include <bits/stdc++.h>
 using namespace std;
-
-// You are given two lists of closed intervals, firstList and secondList, where firstList[i] = [starti, endi] and secondList[j] = [startj, endj].
-// Each list of intervals is pairwise disjoint and in sorted order.
-// Return the intersection of these two interval lists.
-// A closed interval [a, b] (with a <= b) denotes the set of real numbers x with a <= x <= b.
-// The intersection of two closed intervals is a set of real numbers that are either empty or represented as a closed interval. For example, the intersection of [1, 3] and [2, 4] is [2, 3].
- 
-
-// Example 1:
-// Input: firstList = [[0,2],[5,10],[13,23],[24,25]], secondList = [[1,5],[8,12],[15,24],[25,26]]
-// Output: [[1,2],[5,5],[8,10],[15,23],[24,24],[25,25]]
-
-// Example 2:
-// Input: firstList = [[1,3],[5,9]], secondList = []
-// Output: []
-
-// Input
-// firstList = [[3,5],[9,20]]
-// secondList = [[4,5],[7,10],[11,12],[14,15],[16,20]]
-
-// Use Testcase
-// Output
-// [[4,5],[9,10],[11,20]]
-// Expected
-// [[4,5],[9,10],[11,12],[14,15],[16,20]]
 
 class Solution {
 public:
-    vector<vector<int>> intervalIntersection(vector<vector<int>>& firstList, vector<vector<int>>& secondList) {
+    vector<vector<int>> oldSolution(vector<vector<int>>& firstList, vector<vector<int>>& secondList) {
         using Intv = std::pair<int, int>;
         using InitList = std::initializer_list<int>;
         std::vector<Intv> sorted;
@@ -66,5 +37,30 @@ public:
             }
         }
         return ret;
+    }
+
+    vector<vector<int>> intervalIntersection(vector<vector<int>>& firstList, vector<vector<int>>& secondList) {
+        vector<vector<int>> all;
+        auto cmp = [](const vector<int>& l, const vector<int>& r) -> bool {
+            return l[0] != r[0] ? l[0] < r[0] : l[1] < r[1];
+        };
+        int i = 0, j = 0;
+        while (i < firstList.size() || j < secondList.size()) {
+            if (i < firstList.size()) all.push_back(firstList[i++]);
+            if (j < secondList.size()) all.push_back(secondList[j++]);
+        }
+        sort(all.begin(), all.end(), cmp);
+        vector<vector<int>> overlapped;
+        for (int i = 0, next = i + 1; i < all.size();) {
+            while (next < all.size() && all[i][1] >= all[next][0]) { // current interval still overlapped with next interval
+                vector<int> v{max(all[i][0], all[next][0]), min(all[i][1], all[next][1])}; // overlapped part
+                overlapped.push_back(v);
+                all[i][1] = max(all[i][1], all[next][1]); // update current interval end
+                next++;
+            }
+            i = next;
+            next = i + 1;
+        }
+        return overlapped;
     }
 };

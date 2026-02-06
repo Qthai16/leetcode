@@ -19,7 +19,7 @@ public:
         auto l = lower_bound(nums, target, 0, nums.size());
         if (l >= nums.size() || nums[l] != target)
             return {-1, -1};
-        auto r = lower_bound(nums, target + 1, l, nums.size());
+        auto r = lower_bound(nums, target + 1, l, nums.size()); // target + 1 means upper bound (a[r] > target)
         if (r - 1 >= 0 && nums[r - 1] == target) {
             return {l, r - 1};
         }

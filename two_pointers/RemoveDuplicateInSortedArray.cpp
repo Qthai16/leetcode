@@ -5,7 +5,7 @@ using namespace std;
 
 class Solution {
 public:
-    int removeDuplicates(vector<int>& nums) {
+    int oldSolution(vector<int>& nums) {
         // sliding windows
         if (nums.size() <= 1) return nums.size();
         int l = 0, r = l + 1;
@@ -31,5 +31,16 @@ public:
             }
         }
         return uniqCnt + 1;
+    }
+    
+    int removeDuplicates(vector<int>& nums) {
+        if (nums.empty()) return 0;
+        int j = 0;
+        for (int i = 1; i < nums.size(); i++) {
+            if (nums[j] != nums[i]) {
+                nums[++j] = nums[i];
+            }
+        }
+        return j + 1;
     }
 };
